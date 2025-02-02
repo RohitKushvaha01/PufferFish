@@ -1,7 +1,4 @@
-# Tauri + React + Typescript
+# PufferFish
+Trying to make a beutiful music player for linux while learning react and rust at same time, wish me luck
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+![image](https://github.com/user-attachments/assets/c15ed9ac-bfae-48cc-86d5-f59853b8fcb6)
