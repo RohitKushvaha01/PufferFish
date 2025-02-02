@@ -21,7 +21,6 @@ const NAVIGATION: Navigation = [
 ];
 
 
-
 function useDemoRouter(initialPath: string): Router {
   const [pathname, setPathname] = React.useState(initialPath);
 
@@ -43,14 +42,19 @@ const Skeleton = styled('div')<{ height: number }>(({ theme, height }) => ({
   content: '" "',
 }));
 
-function DashboardLayoutBasic(props: any) {
+function DashboardLayoutBasic(_props: any) {
   const router = useDemoRouter('/music');
 
+  const EmptySvg = () => (
+    <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg" />
+  );
+  
   return (
     <AppProvider
       navigation={NAVIGATION}
       router={router}
       theme={demoTheme}
+      branding={{ title: 'Music', logo: <EmptySvg/>, homeUrl: '' }}
     >
       <DashboardLayout>
         <PageContainer>
