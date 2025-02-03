@@ -10,7 +10,13 @@ interface SongProps {
 
 const Song: React.FC<SongProps> = ({ name, author, duration }) => {
   return (
-    <ListItemButton>
+    <ListItemButton
+      sx={{
+        borderRadius: "8px",
+        marginLeft: "8px",
+        marginRight: "8px",
+      }}
+    >
       <ListItemIcon>
         <Icons.MusicNoteOutlined />
       </ListItemIcon>

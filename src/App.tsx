@@ -7,9 +7,9 @@ import {
   Box,
   ListItemButton,
 } from "@mui/material";
+
 import * as Icons from "@mui/icons-material";
-import Song from "./components/song";
-import { invoke } from "@tauri-apps/api/core";
+import Song from "./components/Song";
 
 const drawerWidth = 240;
 
@@ -29,7 +29,14 @@ const App = () => {
         }}
       >
         <List>
-          <ListItemButton key={"Music"}>
+          <ListItemButton
+            key={"Music"}
+            sx={{
+              borderRadius: "8px",
+              marginLeft: "8px",
+              marginRight: "8px",
+            }}
+          >
             <ListItemIcon>
               <Icons.MusicNoteOutlined />
             </ListItemIcon>
@@ -46,6 +53,23 @@ const App = () => {
           minHeight: "100vh",
         }}
       >
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
+        <Song name="Example Song" author="Author Name" duration="3:45" />
         <Song name="Example Song" author="Author Name" duration="3:45" />
       </Box>
     </div>
