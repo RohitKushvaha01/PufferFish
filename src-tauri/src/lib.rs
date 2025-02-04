@@ -80,7 +80,7 @@ fn play_audio(path: &str) {
     thread::spawn(move || {
         let (_stream, stream_handle) = OutputStream::try_default().unwrap();
         let file = File::open(&path).unwrap();
-        let decoder = Decoder::new_mp3(BufReader::new(file)).unwrap();
+        let decoder = Decoder::new(BufReader::new(file)).unwrap();
 
         // Use Sink to manage playback without blocking the thread
         let sink = Sink::try_new(&stream_handle).unwrap();
