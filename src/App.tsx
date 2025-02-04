@@ -6,52 +6,36 @@ import {
   ListItemText,
   Box,
   ListItemButton,
+  Card,
 } from "@mui/material";
 
 import * as Icons from "@mui/icons-material";
 import Song from "./components/Song";
 import { invoke } from "@tauri-apps/api/core";
+import CardButton from "./components/CardButton";
+import { getSongs } from "./Songs";
+
+import * as fs from "@tauri-apps/plugin-fs";
 
 const drawerWidth = 240;
 
 const App = () => {
-  const [files, setFiles] = React.useState<string[]>([]);
+  const [files, setFiles] = React.useState<
+    { path: string; name: string; duration: String }[]
+  >([]);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     const fetchFiles = async () => {
       try {
-        // Fetch the list of files
-        const fileList = await invoke<string[]>("list_files", {
-          path: "/home/rohit",
-        });
+        const fileDetails = await getSongs();
 
-        // Filter files asynchronously
-        const validFiles = await Promise.all(
-          fileList.map(async (file) => {
-            const isValid = await invoke<boolean>("isfile", { path: file });
-            return isValid && !file.startsWith(".") ? file : null; // Filter out non-files and hidden files
-          })
-        );
-
-        // Now filter out `null` values (files that are not valid)
-        const filteredFiles = validFiles.filter(
-          (file) => file !== null
-        ) as string[];
-
-        // Map to get file names with async calls
-        const moreValidFiles = await Promise.all(
-          filteredFiles.map(async (file) => {
-            const fileName = await invoke<string>("get_file_name", {
-              path: file,
-            });
-            const isValid = await invoke<boolean>("isfile", { path: file });
-            return fileName + " : " + isValid;
-          })
-        );
-
-        setFiles(moreValidFiles);
+        setFiles(fileDetails);
       } catch (error) {
+        alert("Error fetching files \n" + error);
         console.error("Error fetching files:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -97,12 +81,21 @@ const App = () => {
           minHeight: "100vh",
         }}
       >
-        {files.length > 0 ? (
+        {loading ? (
+          <CardButton text={"Loading Songs..."} />
+        ) : files.length > 0 ? (
           files.map((file, index) => (
-            <Song key={index} name={file} duration={"3:45"} />
+            <Song
+              key={index}
+              name={file.name}
+              duration={file.duration.valueOf()}
+              onClick={() => {
+                invoke("play_audio", { path: file.path });
+              }}
+            />
           ))
         ) : (
-          <p>Loading songs...</p>
+          <CardButton text={"No Songs Found"} />
         )}
       </Box>
     </div>

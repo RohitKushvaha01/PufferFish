@@ -5,11 +5,13 @@ import * as Icons from "@mui/icons-material";
 interface SongProps {
   name: string;
   duration: string;
+  onClick?: () => void;
 }
 
-const Song: React.FC<SongProps> = ({ name, duration }) => {
+const Song: React.FC<SongProps> = ({ name, duration, onClick }) => {
   return (
     <ListItemButton
+      onClick={onClick}
       sx={{
         borderRadius: "8px",
         marginLeft: "8px",
